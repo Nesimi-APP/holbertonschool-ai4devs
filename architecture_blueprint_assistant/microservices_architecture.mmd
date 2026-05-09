@@ -1,27 +1,19 @@
 graph TD
-    Client([Mobile/Web Client]) --> Gateway[API Gateway]
+    Gateway[API Gateway] --> Auth[Auth Service]
+    Gateway --> Orders[Order Service]
+    Gateway --> Inventory[Inventory Service]
+    Gateway --> User[User Profile Service]
     
-    subgraph "Core Services"
-        Gateway --> Auth[Auth Service]
-        Gateway --> Ride[Ride Management Service]
-        Gateway --> Match[Driver Dispatch Service]
-        Gateway --> Pay[Transaction & Billing Service]
-        Gateway --> Review[Reputation Service]
+    Orders --> Payments[Payment Service]
+    Orders --> Inventory
+    Orders --> Shipping[Shipping Service]
+    
+    Payments --> Notify[Notification Service]
+    Shipping --> Notify
+    
+    subgraph Data Persistence
+        DB1[(Auth DB)] --- Auth
+        DB2[(Order DB)] --- Orders
+        DB3[(Inventory DB)] --- Inventory
+        DB4[(Payment DB)] --- Payments
     end
-
-    subgraph "Infrastructure & Async"
-        Gateway --> Notify[Notification Dispatcher]
-        Ride -- "Event: RideCreated" --> Match
-        Pay -- "Event: PaymentSuccess" --> Notify
-        Ride -- "Event: RideCompleted" --> Pay
-        
-        Events{Message Broker}
-        Ride -.-> Events
-        Pay -.-> Events
-        Events -.-> Analytics[Data Warehouse Analytics]
-    end
-
-    Auth --- AuthDB[(Identity Store)]
-    Ride --- RideDB[(Ride State Store)]
-    Pay --- PayDB[(Ledger Store)]
-    Review --- RevDB[(Review Store)]
