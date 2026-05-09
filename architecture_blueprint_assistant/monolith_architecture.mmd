@@ -1,0 +1,26 @@
+graph TD
+  User((User)) --> Frontend[Web & Mobile Frontend]
+  Frontend --> Backend[Monolithic Backend Server]
+  
+  subgraph Backend
+    Auth[Auth & Session Module]
+    Gami[Gamification Engine]
+    AI[AI Adaptive Learning Path]
+    Sandbox[Code Execution Sandbox]
+    Curric[Curriculum Manager]
+    Review[Peer Review System]
+    Arena[Battle Arena Module]
+    
+    %% Interactions within Monolith
+    Auth --> Gami
+    Curric --> Sandbox
+    Sandbox --> Gami
+    AI --> Curric
+    Arena --> Gami
+    Review --> Gami
+  end
+
+  Backend --> DB[(Central Database)]
+  Gami --> DB
+  Auth --> DB
+  Curric --> DB
