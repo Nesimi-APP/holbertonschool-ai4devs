@@ -1,21 +1,21 @@
 Risk	Severity	Notes
-Hardcoded Credentials	High	
-Hassas veritabanı şifreleri config.php içerisinde açık metin olarak bulundu.  
+Plaintext Credential Storage	High	
+Veritabanı bağlantı dizesi config.php dosyasında şifrelenmemiş halde duruyor; dosya erişimi tüm yetkileri ifşa eder.  
 
-SQL Injection Vulnerability	High	
-Login modülünde kullanıcı girişleri sanitize edilmiyor; veri sızıntısı riski var.  
+Unsanitized User Inputs (SQLi)	High	
+Login formundaki POST verileri doğrudan sorguya dahil ediliyor; yetkisiz veri erişimi ve tablo silme riski mevcut.  
 
-Deprecated API Usage	High	
-Artık desteklenmeyen PHP fonksiyonları kullanılıyor; sistem güncellemelerinde çökme yaşanabilir.  
+Broken Access Control	High	
+/admin dizini için session kontrolü eksik; URL'i bilen her kullanıcı yönetici paneline erişebiliyor.  
 
-Exposure of Sensitive Error Messages	Medium	
-Hata ayıklama modunda stack trace verileri son kullanıcıya gösteriliyor; iç dizin yapısı ifşa oluyor.  
+Insecure Error Handling	Medium	
+Uygulama hatalarında sunucu yolu ve PHP sürümü kullanıcıya gösteriliyor; bu durum saldırganlara sistem haritası sağlar.  
 
-Missing Unit Tests	Medium	
-Kritik iş mantığı modülleri test edilmemiş; regresyon hatalarına açık bir yapı mevcut.  
+Legacy Library Dependency	Medium	
+PHP 5.6 döneminden kalan ve artık güvenlik yaması almayan kütüphaneler kullanılıyor; sistem modern sunucularda çalışmayabilir.  
 
-Tight Coupling	Medium	
-Nesneler birbirine aşırı bağımlı; modülerlik düşük olduğu için refactoring süreci zorlaşıyor.  
+High Code Complexity (Spaghetti Code)	Medium	
+İş mantığı ve UI katmanı iç içe geçmiş durumda; bu karmaşıklık güvenlik yamalarının uygulanmasını engelliyor.  
 
-Insufficient Logging	Low	
-Sistem hataları için olay izleme kaydı tutulmuyor; hata ayıklama süreci yavaşlıyor.
+Lack of Audit Trails	Low	
+Kritik sistem değişiklikleri (kullanıcı silme, yetki değiştirme) loglanmıyor; bir ihlal sonrası geriye dönük inceleme yapılamaz.
