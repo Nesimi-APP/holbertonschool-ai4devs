@@ -1,19 +1,27 @@
 graph TD
-    A[API Gateway] --> B[Auth Service]
-    A --> C[Ride Service]
-    A --> D[Payment Service]
-    A --> E[Notification Service]
-    A --> F[Analytics Service]
-    A --> G[Review Service]
-    A --> H[Matching Service]
+    Client([Mobile/Web Client]) --> Gateway[API Gateway]
+    
+    subgraph "Core Services"
+        Gateway --> Auth[Auth Service]
+        Gateway --> Ride[Ride Management Service]
+        Gateway --> Match[Driver Dispatch Service]
+        Gateway --> Pay[Transaction & Billing Service]
+        Gateway --> Review[Reputation Service]
+    end
 
-    B --- B_DB[(Auth DB)]
-    C --- C_DB[(Ride DB)]
-    D --- D_DB[(Payment DB)]
-    G --- G_DB[(Review DB)]
+    subgraph "Infrastructure & Async"
+        Gateway --> Notify[Notification Dispatcher]
+        Ride -- "Event: RideCreated" --> Match
+        Pay -- "Event: PaymentSuccess" --> Notify
+        Ride -- "Event: RideCompleted" --> Pay
+        
+        Events{Message Broker}
+        Ride -.-> Events
+        Pay -.-> Events
+        Events -.-> Analytics[Data Warehouse Analytics]
+    end
 
-    C --> H
-    H --> C
-    D --> E
-    C --> E
-    F ---|Consumes Events| E
+    Auth --- AuthDB[(Identity Store)]
+    Ride --- RideDB[(Ride State Store)]
+    Pay --- PayDB[(Ledger Store)]
+    Review --- RevDB[(Review Store)]
