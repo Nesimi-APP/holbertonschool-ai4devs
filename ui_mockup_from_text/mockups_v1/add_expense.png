@@ -1,0 +1,11 @@
+Concept: A clean, focused input form.
+
+Input Field: Large numeric keypad-style input for the amount at the top ($0.00).
+
+Category Selector: Horizontal scrolling icons (🍔 Food, 🚗 Transport, 🛍️ Shopping).
+
+Date Picker: Defaulted to "Today."
+
+Note Field: "What was this for?" placeholder.
+
+Primary Button: A large, high-contrast "Save Expense" button at the bottom.

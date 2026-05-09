@@ -1,0 +1,11 @@
+Concept: A high-level financial overview for the user.
+
+Header: Welcome message ("Hello, Alex!") and a profile icon.
+
+Hero Card: Total Balance displayed in large font, with a small "monthly change" percentage.
+
+Quick Actions: Three circular buttons: "Add Expense," "Scan Receipt," and "Transfer."
+
+Visuals: A simple doughnut chart showing spending categories (Food, Rent, Entertainment).
+
+Recent Activity: A short list of the last 3 transactions
