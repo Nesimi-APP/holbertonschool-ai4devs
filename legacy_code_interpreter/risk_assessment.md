@@ -1,11 +1,21 @@
-# Risk Assessment
+Risk	Severity	Notes
+Hardcoded Credentials	High	
+Hassas veritabanı şifreleri config.php içerisinde açık metin olarak bulundu.  
 
-| Risk | Severity | Notes |
-| :--- | :--- | :--- |
-| Hardcoded credentials | High | Found in config.php |
-| SQL Injection Vulnerability | High | User input is not properly sanitized in the login module |
-| Missing unit tests | Medium | Critical modules untested, leading to potential regression issues |
-| Deprecated API usage | High | Relies on removed PHP functions; will break in next update |
-| Tight coupling | Medium | Objects are overly dependent on each other, making refactoring difficult |
-| No logging | Low | Debugging system failures is harder due to lack of event traces |
-| Exposure of Sensitive Error Messages | Medium | Stack traces are visible to users, revealing internal paths |
+SQL Injection Vulnerability	High	
+Login modülünde kullanıcı girişleri sanitize edilmiyor; veri sızıntısı riski var.  
+
+Deprecated API Usage	High	
+Artık desteklenmeyen PHP fonksiyonları kullanılıyor; sistem güncellemelerinde çökme yaşanabilir.  
+
+Exposure of Sensitive Error Messages	Medium	
+Hata ayıklama modunda stack trace verileri son kullanıcıya gösteriliyor; iç dizin yapısı ifşa oluyor.  
+
+Missing Unit Tests	Medium	
+Kritik iş mantığı modülleri test edilmemiş; regresyon hatalarına açık bir yapı mevcut.  
+
+Tight Coupling	Medium	
+Nesneler birbirine aşırı bağımlı; modülerlik düşük olduğu için refactoring süreci zorlaşıyor.  
+
+Insufficient Logging	Low	
+Sistem hataları için olay izleme kaydı tutulmuyor; hata ayıklama süreci yavaşlıyor.
