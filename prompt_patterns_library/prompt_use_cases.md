@@ -1,1 +1,65 @@
-Terminaldakı nəticəyə əsasən, sənin təqdim etdiyin struktur ümumilikdə yaxşıdır, lakin AI-nın qiymətləndirməsinə (Evaluation) görə əsas çatışmazlıq hər kateqoriyada ən azı 3 geniş istifadə ssenarisinin (use case) olmamasıdır. Xüsusilə 1-ci və 4-cü kateqoriyalar üzrə sayı artırmalı və hər birini daha ətraflı yazmalısan.Aşağıda bu tələblərə tam cavab verən, hər kateqoriyada ən azı 3 use case olan və formatı düzəldilmiş variantı təqdim edirəm. Bunu ai_debug_log.md və ya müvafiq sənədinə əlavə edə bilərsən:AI Debugging & Development Assistant: Use Case Catalog1. Kod Keyfiyyəti və Refaktorinq (Code Quality & Refactoring)Kodun Optimallaşdırılması:Giriş: İç-içə mürəkkəb dövrlər (nested loops) və ya ağır hesablamalar olan kod bloku.Çıxış: Zaman və yaddaş mürəkkəbliyi ($O$ notation) optimallaşdırılmış, daha sürətli yeni kod.Dizayn Patternlərinin Tətbiqi:Giriş: "Spaghetti" kod və ya təkrar olunan (redundant) funksionallıq.Çıxış: Uyğun dizayn patterni (məsələn, Singleton, Strategy, Factory) tətbiq edilmiş strukturlaşdırılmış kod.Legacy Kodun Müasirləşdirilməsi:Giriş: Köhnə kitabxanalar və ya köhnəlmiş sintaksis (məsələn, Python 2.7 və ya köhnə ES5 JavaScript).Çıxış: Müasir standartlara (məsələn, Python 3.12+ və ya ES6+ modules) uyğunlaşdırılmış təhlükəsiz kod.2. Xətaların Tapılması və Sazlanması (Debugging & Error Handling)Stack Trace Analizi:Giriş: Terminaldan alınan xəta mesajı (error log) və əlaqəli kod parçası.Çıxış: Xətanın kök səbəbinin (root cause) izahı və onu aradan qaldırmaq üçün konkret kod düzəlişi.Təhlükəsizlik Boşluqlarının Tapılması:Giriş: Web formaları və ya verilənlər bazası sorğuları (queries) olan kod.Çıxış: SQL Injection və ya XSS kimi boşluqların müəyyən edilməsi və "sanitized" edilmiş təhlükəsiz kod versiyası.Məntiqi Səhvlərin (Logical Bugs) Təsbiti:Giriş: Sintaktik xətası olmayan, lakin gözlənilən nəticəni verməyən funksiya.Çıxış: Məntiqdəki yanlışlığın (məsələn, off-by-one error) izahı və düzgün alqoritmik həll.3. Testləşdirmə (Testing)Unit Testlərin Yaradılması:Giriş: Bir sinif (class) və ya funksiya.Çıxış: PyTest, Jest və ya JUnit formatında yazılmış, bütün əsas funksionallığı əhatə edən test ssenariləri.Edge Case Ssenariləri:Giriş: İstifadəçi məlumatlarını qəbul edən API endpointi.Çıxış: Boş giriş, limitdən artıq ölçü, yanlış məlumat tipi və ya xüsusi simvollar kimi kənar hallar üçün test siyahısı.Mock Məlumatların Hazırlanması:Giriş: Verilənlər bazası sxemi (Schema) və ya API strukturu.Çıxış: Testlər zamanı istifadə ediləcək JSON formatında geniş və müxtəlif saxta (mock) məlumatlar.4. Sənədləşdirmə və Baxım (Documentation & Maintenance)API Sənədlərinin Yaradılması:Giriş: Siniflərin, metodların və onların parametrlərinin mənbə kodu.Çıxış: JSDoc, Doxygen və ya Swagger/Markdown formatında genişləndirilmiş texniki sənədlər.Commit Mesajlarının Hazırlanması:Giriş: git diff çıxışı (edilməmiş dəyişikliklərin siyahısı).Çıxış: "Conventional Commits" standartına uyğun (məsələn, feat:, fix:, refactor:) aydın mesajlar.Kod Şərhlərinin Əlavə Edilməsi:Giriş: Sıx, mürəkkəb və oxunması çətin olan alqoritmik kod bloku.Çıxış: Hər bir məntiqi addımın məqsədini izah edən daxili (inline) və blok şərhlər.
+# Prompt Use Cases
+
+## Code Quality
+- **Refactoring**
+  - **Goal**: Improve readability and performance
+  - **Input**: Source function in [LANGUAGE]
+  - **Output**: Optimized code + explanation
+
+- **Style Enforcement**
+  - **Goal**: Enforce consistent naming and formatting
+  - **Input**: Code block
+  - **Output**: Rewritten code with consistent style
+
+- **Complexity Analysis**
+  - **Goal**: Identify and reduce Big O complexity or cyclomatic complexity
+  - **Input**: Algorithm or function
+  - **Output**: Analysis report and simplified alternative
+
+## Debugging
+- **Error Identification**
+  - **Goal**: Find the root cause of a specific runtime or compile-time error
+  - **Input**: Stack trace + relevant code snippet
+  - **Output**: Explanation of the bug and a fix
+
+- **Logical Flaw Detection**
+  - **Goal**: Identify "silent" bugs where code runs but produces wrong output
+  - **Input**: Code + expected vs. actual output
+  - **Output**: Correction of the logical flow
+
+- **Security Vulnerability Scanning**
+  - **Goal**: Detect common security risks like SQL injection or XSS
+  - **Input**: Source code
+  - **Output**: List of vulnerabilities and patched code versions
+
+## Documentation
+- **Docstring Generation**
+  - **Goal**: Automatically generate comprehensive documentation for functions/classes
+  - **Input**: Raw source code
+  - **Output**: Code with standardized docstrings (e.g., Javadoc, Google Style)
+
+- **README Creation**
+  - **Goal**: Summarize project functionality for high-level understanding
+  - **Input**: Project structure and main scripts
+  - **Output**: A professional README.md file
+
+- **API Specification**
+  - **Goal**: Convert code endpoints into structured API documentation
+  - **Input**: Controller or Route files
+  - **Output**: OpenAPI/Swagger specification text
+
+## Testing
+- **Unit Test Generation**
+  - **Goal**: Increase code coverage with automated test cases
+  - **Input**: Function or Class logic
+  - **Output**: Test suite using framework (e.g., Jest, PyTest)
+
+- **Edge Case Identification**
+  - **Goal**: Find input values that might break the system
+  - **Input**: Component requirements or code
+  - **Output**: List of boundary conditions and corresponding test inputs
+
+- **Mock Data Generation**
+  - **Goal**: Create realistic datasets for integration testing
+  - **Input**: Schema definition or JSON example
+  - **Output**: Array of diverse, valid mock objects
