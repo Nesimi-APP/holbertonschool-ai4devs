@@ -1,19 +1,26 @@
 graph TD
-    Gateway[API Gateway] --> Auth[Auth Service]
-    Gateway --> Orders[Order Service]
-    Gateway --> Inventory[Inventory Service]
-    Gateway --> User[User Profile Service]
+    %% Entry Point
+    Gateway[API Gateway] --> Auth[Identity & Access Service]
+    Gateway --> Catalog[Product Catalog Service]
+    Gateway --> Orders[Order Management Service]
+    Gateway --> Users[User Profile Service]
+
+    %% Service Interactions
+    Orders --> Inventory[Warehouse & Inventory Service]
+    Orders --> Payments[Billing & Payment Service]
+    Orders --> Shipping[Logistics & Shipping Service]
     
-    Orders --> Payments[Payment Service]
-    Orders --> Inventory
-    Orders --> Shipping[Shipping Service]
-    
-    Payments --> Notify[Notification Service]
-    Shipping --> Notify
-    
-    subgraph Data Persistence
-        DB1[(Auth DB)] --- Auth
-        DB2[(Order DB)] --- Orders
-        DB3[(Inventory DB)] --- Inventory
-        DB4[(Payment DB)] --- Payments
+    %% Async Communication
+    Payments --> Marketing[Marketing & Promo Service]
+    Shipping --> Notification[Communication Service]
+    Orders --> Analytics[Business Intelligence Service]
+
+    %% Data Isolation (Database per Service)
+    subgraph Storage
+        db1[(Auth DB)] --- Auth
+        db2[(Catalog DB)] --- Catalog
+        db3[(Order DB)] --- Orders
+        db4[(Inventory DB)] --- Inventory
+        db5[(User DB)] --- Users
+        db6[(Payment DB)] --- Payments
     end
